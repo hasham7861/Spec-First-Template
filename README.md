@@ -1,4 +1,4 @@
-# Sample Spec First API
+# Spec-First-Template
 
 ## Description
 
@@ -40,4 +40,3 @@
 └── pkg
   └── utils          # Utility functions
 ```
-# Spec-First-Template
