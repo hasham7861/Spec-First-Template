@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-	"sample-spec-first-api/gen"
+	gen "sample-spec-first-api/api"
 )
 
 // RegisterHandlers maps all routes defined in the OpenAPI spec to their respective methods.

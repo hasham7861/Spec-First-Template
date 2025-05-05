@@ -13,11 +13,11 @@ tools:
 
 generate: tools
 		@echo "Generating code from OpenAPI spec..."
-		$(OAPI_CODEGEN) -generate std-http-server,spec,types -package gen -o gen/api.gen.go api.yaml
+		$(OAPI_CODEGEN) -generate std-http-server,spec,types -package gen -o api/api.gen.go api/api.yaml
 
 clean:
-		rm -f gen/api.gen.go
+		rm -f api/api.gen.go
 
 start: 
 		@echo "Starting the server..."
-		$(GO) run main.go
+		$(GO) run cmd/main.go

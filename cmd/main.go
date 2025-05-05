@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"sample-spec-first-api/handlers"
+	"sample-spec-first-api/internals/handlers"
 )
 
 func main() {
