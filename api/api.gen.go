@@ -24,8 +24,8 @@ type ServerInterface interface {
 	// (GET /)
 	GetIndex(w http.ResponseWriter, r *http.Request)
 
-	// (GET /hello)
-	GetHello(w http.ResponseWriter, r *http.Request)
+	// (GET /user)
+	GetUser(w http.ResponseWriter, r *http.Request)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -51,11 +51,11 @@ func (siw *ServerInterfaceWrapper) GetIndex(w http.ResponseWriter, r *http.Reque
 	handler.ServeHTTP(w, r)
 }
 
-// GetHello operation middleware
-func (siw *ServerInterfaceWrapper) GetHello(w http.ResponseWriter, r *http.Request) {
+// GetUser operation middleware
+func (siw *ServerInterfaceWrapper) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetHello(w, r)
+		siw.Handler.GetUser(w, r)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -186,7 +186,7 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 	}
 
 	m.HandleFunc("GET "+options.BaseURL+"/", wrapper.GetIndex)
-	m.HandleFunc("GET "+options.BaseURL+"/hello", wrapper.GetHello)
+	m.HandleFunc("GET "+options.BaseURL+"/user", wrapper.GetUser)
 
 	return m
 }
@@ -194,11 +194,11 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/6yPsU7tMAyGXyX65+i097J1YwG6IfUJQmraHLWJFfsgjqq8O0oqVgZEhtiy8zn+DoT4",
-	"njAc0KAbYcDkdt7ITEzePIUsahwHWHxQlpAiBvy79CgWiSnW1oCHS3/pYcFOV6mzunotpDUkpuw0pDjO",
-	"GPBMOsaZPmGRSThFoUb87/safIpKsXGOeQu+kd1V6scHxK+0u5pxrnM1nLSo01vL9M5VQjSHuKAU+11J",
-	"b1fyilJLM4nPgfXUeXwdTRBz49osFt1K25Z+MnhpD/7UYCcRt9AvFSZ3N+fWpZ2vAAAA///ReDN81gEA",
-	"AA==",
+	"H4sIAAAAAAAC/6yPMU87MQzFv0rkOWrv/2fLxkJ1G1LFhBhCzlxdXRMT+xDolO+OnAqJCTGQIbb88pz3",
+	"24DyS4GwgZIuCAGO8cILuiNjcndURV1kAg9vWIVKhgD/dgM0D4UxmxTgZjfsBvDAUU9iu/Z2zahWCmON",
+	"SiWPEwQ4oI55wnfwUFG4ZMHu+D8MVlLJirn7IvNCqTv3Z7GPN5B0wku0jqvtVbq6RaOuvdMPNgjRSnmG",
+	"1vzXpDyfMSk0G00oqRLrFef2fnQkbmUTm4f9Klh/Angw/U/z0/QtO2XFGWsPX/F1pYoThEd79PQLnAOq",
+	"6wStn88AAAD//7c1XOPhAQAA",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

@@ -1,0 +1,16 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  cmd = "go build -o ./tmp/main ./cmd/main.go"
+  bin = "./tmp/main"
+  include_dir = ["cmd", "api", "internals"]
+  exclude_dir = ["tmp"]
+  include_ext = ["go", "yaml"]
+  exclude_regex = ["_test.go"]
+
+[log]
+  time = false
+
+[misc]
+  clean_on_exit = true

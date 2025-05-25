@@ -19,6 +19,16 @@
 - Makefile is used to create scripting to make development easier
 - To run program `make start`
 
+### Available Makefile Commands
+
+| Command         | Description                                                             |
+| --------------- | ----------------------------------------------------------------------- |
+| `make tools`    | Install all tools defined in tools.go (oapi-codegen, air, etc.)         |
+| `make generate` | Generate code from OpenAPI spec using oapi-codegen (creates api.gen.go) |
+| `make clean`    | Remove generated code files (api.gen.go)                                |
+| `make start`    | Start the server directly with `go run cmd/main.go`                     |
+| `make dev`      | Start development server with hot reload using Air for faster iteration |
+
 ### Folder Architecture
 
 ```
@@ -28,15 +38,28 @@
 ├── go.mod             # Go module definition
 ├── go.sum             # Go module dependencies
 ├── tools.go           # Tooling dependencies for development
+├── sample-sqlite.db   # SQLite database file
 ├── api
-│   ├── spec.yaml      # OpenAPI specification
-│   └── generated      # Generated code from OpenAPI spec
+│   ├── api.yaml       # OpenAPI specification
+│   └── api.gen.go     # Generated code from OpenAPI spec
 ├── cmd
 │   └── main.go        # Entry point for the application
-├── internal
-│   ├── handlers       # HTTP handlers
-│   ├── services       # Business logic
-│   └── models         # Data models
-└── pkg
-  └── utils          # Utility functions
+├── db
+│   ├── setup.go       # Database initialization
+│   ├── models         # Database models
+│   │   └── user.model.go
+│   └── repositories   # Data access repositories
+│       └── user.repository.go
+├── internals          # Note: "internals" not "internal"
+│   └── handlers       # HTTP handlers
+│       ├── handler.types.go
+│       ├── index.handler.go
+│       ├── register.go # Handler registration functions
+│       └── user.handler.go
+├── middlewares        # HTTP middleware components
+│   ├── logger.middleware.go
+│   ├── requestChain.middleware.go
+│   └── responseHeaders.middleware.go
+└── utils              # Utility functions
+    └── jsonEncoder.util.go
 ```

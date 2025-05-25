@@ -17,16 +17,19 @@ paths:
                 properties:
                   status:
                     type: string
-  /hello:
+
+  /user:
     get:
-      operationId: getHello
+      operationId: getUser
       responses:
         "200":
-          description: Say hello
+          description: Get user
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
+                  id:
+                    type: integer
+                required:
+                  - id
